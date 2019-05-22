@@ -2,16 +2,11 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-class UserProfile(models.Model):
+class UserProfile(User):
     # This line is required. Links UserProfile to a User model instance.
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    name = models.CharField("First name", max_length=255)
-    email = models.EmailField(unique=True)
+    user = models.ForeignKey(User, related_name="users",
+                              on_delete=models.CASCADE, null=True)
     points = models.IntegerField(default=0)
-    bio = models.TextField(max_length=500, blank=True, default='')
-
-    def __str__(self):
-        return self.user.username
 
 
 class Question(models.Model):
@@ -23,9 +18,6 @@ class Question(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(null=True)
 
-    def __str__(self):
-        return self.question_text
-
 
 class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
@@ -34,9 +26,6 @@ class Answer(models.Model):
     user_data = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(null=True)
-
-    def __str__(self):
-        return self.answer_text
 
 
 class Voter(models.Model):

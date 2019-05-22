@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Questions from "./components/Questions";
+import Question from "./components/questions/question";
 import { Provider } from "react-redux";
 import store from "./store";
 
@@ -9,7 +9,7 @@ class App extends Component {
     return (
       <Provider store={store}>
         <div className="App">
-          <Questions />
+          <Question />
         </div>
       </Provider>
     );

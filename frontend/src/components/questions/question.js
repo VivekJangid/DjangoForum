@@ -1,14 +1,26 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getQuestions } from "../actions/questionAction";
-import { createQuestions } from "../actions/questionAction";
+import {
+  getAllQuestions,
+  getQuestion,
+  createQuestion,
+  updateQuestions,
+  deleteQuestion
+} from "../../actions/question";
 
-class Questions extends Component {
+class Question extends Component {
+  static propTypes = {
+    questions: PropTypes.array.isRequired,
+    getQuestion: PropTypes.func.isRequired,
+    getAllQuestions: PropTypes.func.isRequired
+  };
+
   componentWillMount() {
-    this.props.getQuestions();
+    this.props.getAllQuestions();
+    this.props.getQuestion();
+    this.props.deleteQuestion();
   }
-
   render() {
     const postQuestions = this.props.questions.map(question => (
       <div key={question.id}>
@@ -27,16 +39,11 @@ class Questions extends Component {
   }
 }
 
-Questions.PropTypes = {
-  getQuestions: PropTypes.func.isRequired,
-  questions: PropTypes.array.isRequired
-};
-
 const mapStateToProps = state => ({
-  questions: state.questions.items
+  questions: state.question.questions
 });
 
 export default connect(
   mapStateToProps,
-  { getQuestions }
-)(Questions);
+  { getAllQuestions, getQuestion, deleteQuestion }
+)(Question);

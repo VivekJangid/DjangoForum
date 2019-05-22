@@ -1,12 +1,14 @@
 from django.shortcuts import render
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets, permissions, generics
+from rest_framework.response import Response
+from knox.models import AuthToken
 from accounts.models import *
 from .serializers import *
 
 
 class UserView(viewsets.ModelViewSet):
-    queryset = UserProfile.objects.all()
     serializer_class = UserSerializer
+    queryset = UserProfile.objects.all()
 
 
 class QuestionView(viewsets.ModelViewSet):
