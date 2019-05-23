@@ -19,6 +19,7 @@ class Question(models.Model):
     updated_at = models.DateTimeField(null=True)
 
 
+
 class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     answer_text = models.CharField(max_length=200)

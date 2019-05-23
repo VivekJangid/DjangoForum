@@ -1,16 +1,19 @@
-import React, { Component } from "react";
-import Question from "./components/questions/question";
+import React, { Component, Fragment } from "react";
+import Dashboard from "./components/questions/dashboard";
 import { Provider } from "react-redux";
 import store from "./store";
+import Header from "./components/layout/Header";
 
 class App extends Component {
-  state = {};
   render() {
     return (
       <Provider store={store}>
-        <div className="App">
-          <Question />
-        </div>
+        <Fragment>
+          <Header />
+          <div className="container">
+            <Dashboard />
+          </div>
+        </Fragment>
       </Provider>
     );
   }

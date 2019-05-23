@@ -3,7 +3,8 @@ import {
   NEW_QUESTION,
   GET_ALLQUESTIONS,
   UPDATE_QUESTION,
-  DELETE_QUESTION
+  DELETE_QUESTION,
+  UPVOTE_QUESTION
 } from "./types";
 import axios from "axios";
 
@@ -43,7 +44,19 @@ export const deleteQuestion = id => dispatch => {
     .catch(err => console.log(err));
 };
 
-export const createQuestion = question => dispatch => {
+export const upvoteQuestion = id => dispatch => {
+  axios
+    .post(`http://localhost:8000/api/questions/${id}/`)
+    .then(res => {
+      dispatch({
+        type: UPVOTE_QUESTION,
+        payload: id
+      });
+    })
+    .catch(err => console.log(err));
+};
+
+export const createQuestion = (question) => dispatch => {
   axios
     .post("http://localhost:8000/api/questions/", question)
     .then(res => {
@@ -56,12 +69,10 @@ export const createQuestion = question => dispatch => {
 };
 
 export const updateQuestions = id => dispatch => {
-  axios
-    .post(`http://localhost:8000/api/questions/${id}/`, tokenConfig(getState))
-    .then(res => {
-      dispatch({
-        type: UPDATE_QUESTION,
-        payload: question
-      });
+  axios.post(`http://localhost:8000/api/questions/${id}/`).then(res => {
+    dispatch({
+      type: UPDATE_QUESTION,
+      payload: question
     });
+  });
 };

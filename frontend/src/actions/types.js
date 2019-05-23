@@ -3,8 +3,21 @@ export const NEW_QUESTION = "NEW_QUESTION";
 export const GET_ALLQUESTIONS = "GET_ALLQUESTIONS";
 export const UPDATE_QUESTION = "UPDATE_QUESTION";
 export const DELETE_QUESTION = "DELETE_QUESTION";
+export const UPVOTE_QUESTION = "UPVOTE_QUESTION";
 
 export const GET_USER = "GET_USER";
 export const NEW_USER = "NEW_USER";
 export const UPDATE_USER = "UPDATE_USER";
 export const DELETE_USER = "DELETE_USER";
+
+export const USER_LOADED = "USER_LOADED";
+export const USER_LOADING = "USER_LOADING";
+export const AUTH_ERROR = "AUTH_ERROR";
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGIN_FAIL = "LOGIN_FAIL";
+export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
+export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
+export const REGISTER_FAIL = "REGISTER_FAIL";
+
+export const CREATE_MESSAGE = "CREATE_MESSAGE";
+export const GET_ERRORS = "GET_ERRORS";

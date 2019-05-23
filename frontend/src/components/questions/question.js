@@ -3,38 +3,64 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import {
   getAllQuestions,
-  getQuestion,
-  createQuestion,
-  updateQuestions,
-  deleteQuestion
+  deleteQuestion,
+  upvoteQuestion
 } from "../../actions/question";
 
 class Question extends Component {
   static propTypes = {
     questions: PropTypes.array.isRequired,
-    getQuestion: PropTypes.func.isRequired,
+    deleteQuestion: PropTypes.func.isRequired,
     getAllQuestions: PropTypes.func.isRequired
   };
 
   componentWillMount() {
     this.props.getAllQuestions();
-    this.props.getQuestion();
-    this.props.deleteQuestion();
   }
+
   render() {
-    const postQuestions = this.props.questions.map(question => (
-      <div key={question.id}>
-        <h3>
-          {question.id}: {question.question_text}{" "}
-        </h3>
-        <p> Posted At: {question.created_at} </p>{" "}
-        <p> Rewards: {question.reward} </p> <p> Views: {question.views} </p>{" "}
-      </div>
-    ));
     return (
-      <div>
-        <h1> Questions </h1> {postQuestions}{" "}
-      </div>
+      <Fragment>
+        <h2>Questions</h2>
+        <table className="table table-striped">
+          <thead>
+            <tr>
+              <th>Question</th>
+              <th>Posted At</th>
+              <th>Rewards</th>
+              <th>Views</th>
+              <th />
+              <th />
+            </tr>
+          </thead>
+          <tbody>
+            {this.props.questions.map(question => (
+              <tr key={question.id}>
+                <td>{question.question_text}</td>
+                <td>{question.created_at}</td>
+                <td>{question.reward}</td>
+                <td>{question.views}</td>
+                <td>
+                  <button
+                    onClick={this.props.upvoteQuestion.bind(this, question.id)}
+                    className="btn btn-primary btn-sm"
+                  >
+                    UpVote
+                  </button>
+                </td>
+                <td>
+                  <button
+                    onClick={this.props.deleteQuestion.bind(this, question.id)}
+                    className="btn btn-danger btn-sm"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </Fragment>
     );
   }
 }
@@ -45,5 +71,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getAllQuestions, getQuestion, deleteQuestion }
+  { getAllQuestions, deleteQuestion, upvoteQuestion }
 )(Question);
