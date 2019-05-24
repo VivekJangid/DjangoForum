@@ -7,8 +7,8 @@ from .serializers import *
 
 
 class UserView(viewsets.ModelViewSet):
-    serializer_class = UserSerializer
     queryset = UserProfile.objects.all()
+    serializer_class = UserSerializer
 
 
 class QuestionView(viewsets.ModelViewSet):

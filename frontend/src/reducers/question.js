@@ -2,11 +2,9 @@ import {
   GET_QUESTION,
   NEW_QUESTION,
   GET_ALLQUESTIONS,
-  UPDATE_QUESTION,
   DELETE_QUESTION,
   UPVOTE_QUESTION
 } from "../actions/types";
-import question from "../components/questions/question";
 
 const initialState = {
   isLoading: false,
@@ -17,6 +15,11 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
+    case NEW_QUESTION:
+      return {
+        ...state,
+        questions: [...state.questions, action.payload]
+      };
     case GET_ALLQUESTIONS:
       return {
         ...state,
@@ -26,7 +29,9 @@ export default function(state = initialState, action) {
     case GET_QUESTION:
       return {
         ...state,
-        questions: action.payload
+        questions: state.questions.filter(
+          question => question.id == action.payload
+        )
       };
     case DELETE_QUESTION:
       return {
@@ -35,20 +40,11 @@ export default function(state = initialState, action) {
           question => question.id !== action.payload
         )
       };
-    case NEW_QUESTION:
-      return {
-        ...state,
-        questions: [...state.questions, action.payload]
-      };
+
     case UPVOTE_QUESTION:
       return {
         ...state,
         questions: [...state.questions.filter, action.payload]
-      };
-    case UPDATE_QUESTION:
-      return {
-        ...state,
-        questions: [...state.questions, action.payload]
       };
     default:
       return state;

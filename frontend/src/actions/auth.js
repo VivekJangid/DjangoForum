@@ -1,5 +1,4 @@
 import axios from "axios";
-import { returnErrors } from "./messages";
 
 import {
   USER_LOADED,
@@ -11,7 +10,6 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAIL
 } from "./types";
-
 
 export const loadUser = () => (dispatch, getState) => {
   // User Loading
@@ -94,7 +92,7 @@ export const logout = () => (dispatch, getState) => {
   axios
     .post("/api/auth/logout/", null, tokenConfig(getState))
     .then(res => {
-      dispatch({ type: 'CLEAR_LEADS' });
+      dispatch({ type: "CLEAR_LEADS" });
       dispatch({
         type: LOGOUT_SUCCESS
       });

@@ -1,11 +1,7 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import {
-  getAllQuestions,
-  deleteQuestion,
-  upvoteQuestion
-} from "../../actions/question";
+import { getAllQuestions, deleteQuestion } from "../../actions/question";
 
 class Question extends Component {
   static propTypes = {
@@ -30,7 +26,6 @@ class Question extends Component {
               <th>Rewards</th>
               <th>Views</th>
               <th />
-              <th />
             </tr>
           </thead>
           <tbody>
@@ -40,14 +35,6 @@ class Question extends Component {
                 <td>{question.created_at}</td>
                 <td>{question.reward}</td>
                 <td>{question.views}</td>
-                <td>
-                  <button
-                    onClick={this.props.upvoteQuestion.bind(this, question.id)}
-                    className="btn btn-primary btn-sm"
-                  >
-                    UpVote
-                  </button>
-                </td>
                 <td>
                   <button
                     onClick={this.props.deleteQuestion.bind(this, question.id)}
@@ -71,5 +58,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getAllQuestions, deleteQuestion, upvoteQuestion }
+  { getAllQuestions, deleteQuestion }
 )(Question);

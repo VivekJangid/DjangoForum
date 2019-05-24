@@ -14,6 +14,8 @@ mysqlclient = "*"
 django-rest-knox = "*"
 pylint-django = "*"
 djangorestframework = "*"
+django-filter = "*"
+djangorestframework-filters = "*"
 
 [requires]
 python_version = "3"

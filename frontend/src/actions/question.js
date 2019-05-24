@@ -1,12 +1,23 @@
 import {
-  GET_QUESTION,
   NEW_QUESTION,
   GET_ALLQUESTIONS,
-  UPDATE_QUESTION,
+  GET_QUESTION,
   DELETE_QUESTION,
   UPVOTE_QUESTION
 } from "./types";
 import axios from "axios";
+
+export const createQuestion = question => dispatch => {
+  axios
+    .post("http://localhost:8000/api/questions/", question)
+    .then(res => {
+      dispatch({
+        type: NEW_QUESTION,
+        payload: res.data
+      });
+    })
+    .catch(err => console.log(err));
+};
 
 export const getAllQuestions = () => dispatch => {
   axios
@@ -22,7 +33,7 @@ export const getAllQuestions = () => dispatch => {
 
 export const getQuestion = id => dispatch => {
   axios
-    .get("http://localhost:8000/api/questions/${id}/")
+    .get(`http://localhost:8000/api/questions/${id}/`)
     .then(res => {
       dispatch({
         type: GET_QUESTION,
@@ -54,25 +65,4 @@ export const upvoteQuestion = id => dispatch => {
       });
     })
     .catch(err => console.log(err));
-};
-
-export const createQuestion = (question) => dispatch => {
-  axios
-    .post("http://localhost:8000/api/questions/", question)
-    .then(res => {
-      dispatch({
-        type: NEW_QUESTION,
-        payload: res.data
-      });
-    })
-    .catch(err => console.log(err));
-};
-
-export const updateQuestions = id => dispatch => {
-  axios.post(`http://localhost:8000/api/questions/${id}/`).then(res => {
-    dispatch({
-      type: UPDATE_QUESTION,
-      payload: question
-    });
-  });
 };
