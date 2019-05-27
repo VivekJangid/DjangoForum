@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 class UserProfile(User):
     # This line is required. Links UserProfile to a User model instance.
     user = models.ForeignKey(User, related_name="users",
-                              on_delete=models.CASCADE, null=True)
+                             on_delete=models.CASCADE, null=True)
     points = models.IntegerField(default=0)
 
 
@@ -19,12 +19,12 @@ class Question(models.Model):
     updated_at = models.DateTimeField(null=True)
 
 
-
 class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     answer_text = models.CharField(max_length=200)
     votes = models.IntegerField(default=0)
-    user_data = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    user_data = models.ForeignKey(
+        UserProfile, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(null=True)
 

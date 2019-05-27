@@ -20,17 +20,17 @@ export default function(state = initialState, action) {
         ...state,
         answers: [...state.answers, action.payload]
       };
+    case GET_ANSWER:
+      return {
+        ...state,
+        answers: state.answers.filter(answer => answer.id == action.payload)
+      };
     case GET_ALLANSWERS:
       return {
         ...state,
         answers: action.payload
       };
 
-    case GET_ANSWER:
-      return {
-        ...state,
-        answers: state.answers.filter(answer => answer.id == action.payload)
-      };
     case DELETE_ANSWER:
       return {
         ...state,

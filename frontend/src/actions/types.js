@@ -11,9 +11,13 @@ export const DELETE_USER = "DELETE_USER";
 export const USER_LOADED = "USER_LOADED";
 export const USER_LOADING = "USER_LOADING";
 export const AUTH_ERROR = "AUTH_ERROR";
+
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAIL = "LOGIN_FAIL";
+
 export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
+export const LOGOUT_FAIL = "LOGOUT_FAIL";
+
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAIL = "REGISTER_FAIL";
 
@@ -22,3 +26,8 @@ export const GET_ALLANSWERS = "GET_ALLANSWERS";
 export const GET_ANSWER = "GET_ANSWER";
 export const DELETE_ANSWER = "DELETE_ANSWER";
 export const UPVOTE_ANSWER = "UPVOTE_ANSWER";
+
+export const NEW_COMMENT = "NEW_COMMENT";
+export const GET_COMMENT = "GET_COMMENT";
+export const GET_ALLCOMMENTS = "GET_ALLCOMMENTS";
+export const DELETE_COMMENT = "DELETE_COMMENT";

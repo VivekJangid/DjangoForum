@@ -57,7 +57,7 @@ export const deleteQuestion = id => dispatch => {
 
 export const upvoteQuestion = id => dispatch => {
   axios
-    .post(`http://localhost:8000/api/questions/${id}/`)
+    .put(`http://localhost:8000/api/questions/${id}/`)
     .then(res => {
       dispatch({
         type: UPVOTE_QUESTION,
