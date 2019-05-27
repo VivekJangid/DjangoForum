@@ -6,10 +6,15 @@ import {
   UPVOTE_QUESTION
 } from "./types";
 import axios from "axios";
+import { tokenConfig } from "./auth";
 
-export const createQuestion = question => dispatch => {
+export const createQuestion = question => (dispatch, getState) => {
   axios
-    .post("http://localhost:8000/api/questions/", question)
+    .post(
+      "http://localhost:8000/api/questions/",
+      question,
+      tokenConfig(getState)
+    )
     .then(res => {
       dispatch({
         type: NEW_QUESTION,
@@ -43,9 +48,9 @@ export const getQuestion = id => dispatch => {
     .catch(err => console.log(err));
 };
 
-export const deleteQuestion = id => dispatch => {
+export const deleteQuestion = id => (dispatch, getState) => {
   axios
-    .delete(`http://localhost:8000/api/questions/${id}/`)
+    .delete(`http://localhost:8000/api/questions/${id}/`, tokenConfig(getState))
     .then(res => {
       dispatch({
         type: DELETE_QUESTION,
@@ -55,9 +60,9 @@ export const deleteQuestion = id => dispatch => {
     .catch(err => console.log(err));
 };
 
-export const upvoteQuestion = id => dispatch => {
+export const upvoteQuestion = id => (dispatch, getState) => {
   axios
-    .put(`http://localhost:8000/api/questions/${id}/`)
+    .put(`http://localhost:8000/api/questions/${id}/`, tokenConfig(getState))
     .then(res => {
       dispatch({
         type: UPVOTE_QUESTION,

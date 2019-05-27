@@ -7,10 +7,14 @@ import Header from "./components/layout/Header";
 import Login from "./components/accounts/Login";
 import Register from "./components/accounts/Register";
 import PrivateRoute from "./components/common/PrivateRoute";
+import { loadUser } from "../src/actions/auth";
 
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
 
 class App extends Component {
+  componentDidMount() {
+    store.dispatch(loadUser());
+  }
   render() {
     return (
       <Provider store={store}>
@@ -22,9 +26,9 @@ class App extends Component {
                 <PrivateRoute exact path="/" component={Questionform} />
                 <Route exact path="/register" component={Register} />
                 <Route exact path="/login" component={Login} />
-              </Switch>
+              </Switch> 
+              <Question />
             </div>
-            <Question />
           </Fragment>
         </Router>
       </Provider>

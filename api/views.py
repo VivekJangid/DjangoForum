@@ -13,24 +13,15 @@ class UserView(viewsets.ModelViewSet):
 
 class QuestionView(viewsets.ModelViewSet):
     serializer_class = QuestionSerializer
-    permission_class = [permissions.IsAuthenticated]
-
-    def get_queryset(self, pk):
-        return Question.objects.get(pk=pk)
-
-    def put(self, request, pk):
-        question = self.get_queryset(pk)
-
-        if(request.user == question.user):
-            serializer = QuestionSerializer(question, data=request.data)
-            if serializer.is_valid():
-                serializer.save(owner=self.request.user)
-                return Response(serializer.data)
+    queryset = Question.objects.all()
 
 
 class AnswerView(viewsets.ModelViewSet):
-    queryset = Answer.objects.all()
     serializer_class = AnswerSerializer
+
+    def get_queryset(self):
+        queryset = Answer.objects.filter(poll_id=self.kwargs["question"])
+        return queryset
 
 
 class VoterView(viewsets.ModelViewSet):

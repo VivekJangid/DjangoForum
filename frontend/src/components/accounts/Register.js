@@ -21,7 +21,7 @@ export class Register extends Component {
     e.preventDefault();
     const { username, email, password, password2 } = this.state;
     if (password !== password2) {
-      console.log("Passwords do not match");
+      alert("Passwords do not match");
     } else {
       const newUser = {
         username,

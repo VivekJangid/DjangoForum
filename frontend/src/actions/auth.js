@@ -24,6 +24,7 @@ export const loadUser = () => (dispatch, getState) => {
       });
     })
     .catch(err => {
+      console.log(err.response.data);
       dispatch({
         type: AUTH_ERROR
       });
@@ -51,6 +52,7 @@ export const login = (username, password) => dispatch => {
       });
     })
     .catch(err => {
+      console.log(err.response.data);
       dispatch({
         type: LOGIN_FAIL
       });
@@ -78,6 +80,7 @@ export const register = ({ username, password, email }) => dispatch => {
       });
     })
     .catch(err => {
+      console.log(err.response.data);
       dispatch({
         type: REGISTER_FAIL
       });
@@ -89,13 +92,12 @@ export const logout = () => (dispatch, getState) => {
   axios
     .post("/api/auth/logout/", null, tokenConfig(getState))
     .then(res => {
-      dispatch({ type: "CLEAR_LEADS" });
       dispatch({
         type: LOGOUT_SUCCESS
       });
     })
     .catch(err => {
-      console.log(err);
+      console.log(err.response.data);
     });
 };
 
